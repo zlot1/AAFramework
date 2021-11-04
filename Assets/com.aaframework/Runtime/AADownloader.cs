@@ -31,6 +31,12 @@ namespace com.aaframework.Runtime
             public long DownloadSize;
         }
         
+        [Serializable]
+        public class CatalogList
+        {
+            public List<string> list;
+        }
+        
         private readonly List<object> _resourceLocators = new List<object>();
         
         private bool _downloading = false;
@@ -118,8 +124,12 @@ namespace com.aaframework.Runtime
         }
 
         private void CacheCatalogList(List<string> catalogs) {
+            var catalogList = new CatalogList {
+                list = catalogs
+            };
+
             var path = Path.Combine(Application.persistentDataPath, "catalogs.json");
-            var json = JsonUtility.ToJson(catalogs);
+            var json = JsonUtility.ToJson(catalogList);
             using (var stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite)) {
                 var bytes = new List<byte> { };
                 var bts = System.Text.Encoding.UTF8.GetBytes(json);
@@ -129,7 +139,7 @@ namespace com.aaframework.Runtime
                 stream.Write(bytes.ToArray(), 0, bytes.Count);
             }
         }
-
+        
         private List<string> LoadCacheCatalogs() {
             var path = Path.Combine(Application.persistentDataPath, "catalogs.json");
             if (!File.Exists(path)) {
@@ -142,8 +152,8 @@ namespace com.aaframework.Runtime
                     var buf = new byte[bufferLen];
                     stream.Read(buf, 0, (int)bufferLen);
                     var json = System.Text.Encoding.UTF8.GetString(buf);
-                    var list = JsonUtility.FromJson<List<string>>(json);
-                    return list;
+                    var catalogList = JsonUtility.FromJson<CatalogList>(json);
+                    return catalogList.list;
                 }
             }
             catch (Exception e) {
