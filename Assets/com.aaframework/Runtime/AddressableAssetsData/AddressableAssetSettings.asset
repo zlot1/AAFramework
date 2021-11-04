@@ -37,9 +37,7 @@ MonoBehaviour:
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 2
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
-  m_GroupAssets:
-  - {fileID: 11400000, guid: 4a88bf6568de14598866ffec133a3e7c, type: 2}
-  - {fileID: 11400000, guid: d515be6af06fe4ec6a4928c5ae677ced, type: 2}
+  m_GroupAssets: []
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
