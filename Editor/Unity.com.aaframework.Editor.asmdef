@@ -1,5 +1,5 @@
 {
-    "name": "Unity.com.ilrframework.Editor",
+    "name": "Unity.com.aaframework.Editor",
     "rootNamespace": "",
     "references": [
         "GUID:c216de62a73c04fd19b61069f4a38401",
