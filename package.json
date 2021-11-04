@@ -1,0 +1,10 @@
+{
+  "name": "com.aaframework",
+  "version": "0.1.1",
+  "displayName": "AAFramework",
+  "description": "",
+  "unity": "2020.3",
+  "dependencies": {
+    "com.unity.addressables": "1.19.9"
+  }
+}
