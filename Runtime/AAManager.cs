@@ -7,6 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
@@ -30,6 +31,15 @@ namespace com.aaframework.Runtime
                 }
                 return _instance;
             }
+        }
+        
+        public void Init() {
+            SpriteAtlasManager.atlasRequested += async (name, action) => {
+                var atlasPath = $"Atlas/{name}.spriteatlas";
+                Debug.Log($"Atlas Requested: {atlasPath}");
+                var atlas = await LoadAssetAsync<SpriteAtlas>(atlasPath);
+                action(atlas);
+            };
         }
         
         /// <summary>
