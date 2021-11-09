@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.U2D;
 
 namespace com.aaframework.Runtime
 {
@@ -23,6 +24,17 @@ namespace com.aaframework.Runtime
 
         private void Awake() {
             Instance = this;
+        }
+
+        private void Start() {
+#if UNITY_EDITOR
+            SpriteAtlasManager.atlasRequested += async (name, action) => {
+                var atlasPath = $"Atlas/{name}.spriteatlas";
+                Debug.Log($"Atlas Requested: {atlasPath}");
+                var atlas = await AAManager.Instance.LoadAssetAsync<SpriteAtlas>(atlasPath);
+                action(atlas);
+            };
+#endif
         }
 
         public struct AAUpdateInfo
